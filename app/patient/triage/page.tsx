@@ -424,7 +424,10 @@ export default function TriagePage() {
 
         {/* ── Stacked card area ──────────────────────────────────────────────── */}
         {(cardStep === "symptoms" || cardStep === "questions" || cardStep === "location") && (
-          <div style={{ maxWidth: 600, width: "100%", display: "flex", flexDirection: "column", gap: "0.625rem" }}>
+          <div style={{ display: "flex", gap: "2.5rem", alignItems: "flex-start", width: "100%" }}>
+
+          {/* LEFT: card stack */}
+          <div style={{ flex: "0 0 auto", width: "min(560px, 100%)", display: "flex", flexDirection: "column", gap: "0.625rem" }}>
 
             {/* Completed card strips */}
             {completedCards.map((card, i) => <CompletedStrip key={i} card={card} />)}
@@ -612,6 +615,62 @@ export default function TriagePage() {
               </div>
             )}
           </div>
+          {/* LEFT card stack end */}
+
+          {/* RIGHT: illustration panel (hidden on mobile) */}
+          <div className="triage-illustration-panel">
+            <div style={{ textAlign: "center" }}>
+              <img
+                src="/sick-illustration.png"
+                alt="Feeling sick illustration"
+                style={{ width: "100%", maxWidth: 320, objectFit: "contain", marginBottom: "1.75rem", filter: "drop-shadow(0 8px 32px rgba(26,86,219,0.10))" }}
+              />
+              <h2 className="font-heading" style={{ fontSize: "1.35rem", color: "#111827", lineHeight: 1.35, marginBottom: "0.75rem" }}>
+                {lang === "bm"
+                  ? "Tidak sihat?\nAnda di tempat yang betul."
+                  : "Not feeling well?\nYou're in the right place."}
+              </h2>
+              <p style={{ fontSize: "0.875rem", color: "#6B7280", lineHeight: 1.75, maxWidth: 280, margin: "0 auto 1.75rem" }}>
+                {lang === "bm"
+                  ? "Huraikan gejala anda dan biarkan empat ejen AI kami menilai kecemasan serta mencari kemudahan terdekat dalam masa 10 saat."
+                  : "Describe your symptoms and let our four AI agents assess urgency and find the nearest facility — in under 10 seconds."}
+              </p>
+              {/* Step progress */}
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "0.5rem" }}>
+                {(["symptoms", "questions", "location"] as const).map((s, i) => {
+                  const stepOrder = { symptoms: 0, questions: 1, location: 2 };
+                  const currentOrder = stepOrder[cardStep as keyof typeof stepOrder] ?? 0;
+                  const done = i < currentOrder;
+                  const active = i === currentOrder;
+                  return (
+                    <div key={s} style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+                      <div style={{
+                        width: active ? 28 : 24, height: active ? 28 : 24,
+                        borderRadius: "50%",
+                        background: done ? "#059669" : active ? "#1A56DB" : "#E5E7EB",
+                        display: "flex", alignItems: "center", justifyContent: "center",
+                        transition: "all 0.3s",
+                        flexShrink: 0,
+                      }}>
+                        {done
+                          ? <RiCheckLine size={13} color="#fff" />
+                          : <span style={{ fontSize: "0.7rem", fontWeight: 700, color: active ? "#fff" : "#9CA3AF" }}>{i + 1}</span>
+                        }
+                      </div>
+                      {i < 2 && <div style={{ width: 28, height: 2, background: done ? "#059669" : "#E5E7EB", borderRadius: 1, transition: "background 0.3s" }} />}
+                    </div>
+                  );
+                })}
+              </div>
+              <div style={{ fontSize: "0.72rem", color: "#9CA3AF", marginTop: "0.625rem", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.05em" }}>
+                {cardStep === "symptoms" ? (lang === "bm" ? "Langkah 1 daripada 3" : "Step 1 of 3")
+                  : cardStep === "questions" ? (lang === "bm" ? "Langkah 2 daripada 3" : "Step 2 of 3")
+                  : (lang === "bm" ? "Langkah 3 daripada 3" : "Step 3 of 3")}
+              </div>
+            </div>
+          </div>
+
+          </div> 
         )}
 
         {/* ── LOADING ── */}

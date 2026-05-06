@@ -291,6 +291,20 @@ body {
   .page-main { padding: 1rem 0.875rem 5.5rem; }
 }
 
+/* ── Triage illustration panel (right side on desktop) ──────────────────── */
+.triage-illustration-panel {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 0 1rem 1rem;
+  position: sticky;
+  top: 5rem;
+}
+@media (max-width: 900px) {
+  .triage-illustration-panel { display: none; }
+}
+
 /* ── Mobile top header (hidden on desktop) ───────────────────────────────── */
 .nav-mobile-topbar {
   display: none;
