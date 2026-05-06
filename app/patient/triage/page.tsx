@@ -398,10 +398,10 @@ export default function TriagePage() {
   return (
     <div style={{ display: "flex", minHeight: "100vh", background: "#F1F5F9" }}>
       <PatientNav user={user} />
-      <main style={{ marginLeft: 220, flex: 1, padding: "2rem 2.5rem", display: "flex", flexDirection: "column", gap: "0" }}>
+      <main className="page-main" style={{ display: "flex", flexDirection: "column", gap: "0" }}>
 
         {/* Header */}
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1.75rem" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1.75rem", flexWrap: "wrap", gap: "0.75rem" }}>
           <div>
             <h1 style={{ fontSize: "1.5rem", fontWeight: 700, color: "#111827", marginBottom: "0.25rem" }}>
               {lang === "bm" ? "Penilaian Kesihatan AI" : "AI Health Assessment"}
@@ -750,7 +750,7 @@ export default function TriagePage() {
                         </div>
                       </div>
                     </div>
-                    <div style={{ display: "flex", flexDirection: "column", gap: "0.625rem", alignItems: "flex-end", minWidth: 180 }}>
+                    <div style={{ display: "flex", flexDirection: "column", gap: "0.625rem", alignItems: "flex-end", minWidth: "min(180px, 100%)" }}>
                       <a href={hospitalPhone ? `tel:${hospitalPhone}` : "tel:+60322999999"}
                         style={{ display: "flex", alignItems: "center", gap: "0.5rem", background: "#059669", color: "#fff", padding: "0.5rem 1rem", borderRadius: "0.5rem", textDecoration: "none", fontWeight: 700, fontSize: "0.82rem" }}>
                         <RiPhoneLine size={15} />{lang === "bm" ? "Hubungi Hospital" : "Call Hospital"}
@@ -799,7 +799,7 @@ export default function TriagePage() {
                       {result.recommended.capacity_status}
                     </span>
                   </div>
-                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.25rem", alignItems: "start" }}>
+                  <div className="grid-facility-detail">
                     <div>
                       <div style={{ fontWeight: 700, fontSize: "1rem", color: "#111827", marginBottom: "0.2rem" }}>{result.recommended.name}</div>
                       <div style={{ display: "flex", alignItems: "center", gap: "0.35rem", fontSize: "0.78rem", color: "#6B7280", marginBottom: "0.125rem" }}>
