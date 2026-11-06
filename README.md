@@ -4,10 +4,42 @@ AI patient triage and hospital routing for Malaysian public healthcare. Built fo
 
 A patient types or speaks their symptoms, optionally uploads a photo, and four AI agents work in sequence: they read the photo, classify urgency, find the best nearby facility and assign a specialist.
 
+## Screenshots
+
+Captured from a local run with the demo patient account.
+
+**Landing page**
+
+![Landing page](docs/screenshots/landing.png)
+
+**Patient login**
+
+![Patient login](docs/screenshots/login.png)
+
+**Patient dashboard**
+
+![Patient dashboard](docs/screenshots/dashboard.png)
+
+**Step 1: choose or type symptoms**
+
+![Step 1: choose or type symptoms](docs/screenshots/triage-symptoms.png)
+
+**Step 2: AI follow-up questions**
+
+![Step 2: AI follow-up questions](docs/screenshots/triage-followup.png)
+
+**Result: priority, predicted condition, specialist, nearest hospital**
+
+![Result: priority, predicted condition, specialist, nearest hospital](docs/screenshots/triage-result.png)
+
+**Medical history**
+
+![Medical history](docs/screenshots/history.png)
+
 ## How it works
 
-1. **Vision agent:** reads the uploaded photo (Groq, LLaMA 4 Scout)
-2. **Triage agent:** sets priority P1 (emergency), P2 (urgent) or P3 (non-urgent) and predicts the likely condition (Groq, LLaMA 3.1 8B)
+1. **Vision agent:** reads the uploaded photo (Groq vision model)
+2. **Triage agent:** sets priority P1 (emergency), P2 (urgent) or P3 (non-urgent) and predicts the likely condition (Groq, gpt-oss-20b)
 3. **Routing agent:** ranks nearby facilities by distance and bed utilisation, and reroutes if the top hospital is at critical capacity
 4. **Assignment agent:** matches a specialist from a virtual pool of 16 doctors
 
