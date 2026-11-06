@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=shark&color=0:0B3D91,100:E11D48&height=200&section=header&text=RawatAI&fontSize=58&fontColor=ffffff&animation=blinking&fontAlignY=36&desc=Malaysia%20Public%20Healthcare%20Agentic%20AI&descAlignY=58&descSize=18" width="100%" alt="RawatAI banner"/>
+<img src="docs/header.svg" width="100%" alt="RawatAI banner"/>
 
 <a href="#screenshots"><img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=20&pause=1200&color=60A5FA&center=true&vCenter=true&width=760&lines=Describe+symptoms+%C2%B7+get+the+right+hospital;4+AI+agents%3A+vision+%C2%B7+triage+%C2%B7+routing+%C2%B7+assignment;3%2C304+MoH+facilities+with+live+bed+utilisation;English+and+Bahasa+Malaysia+%C2%B7+voice+input" alt="Typing summary"/></a>
 
@@ -140,6 +140,6 @@ There is no database: cases are held in memory and reset when the server restart
 
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:E11D48,100:0B3D91&height=110&section=footer&animation=twinkling" width="100%" alt=""/>
+<img src="docs/footer.svg" width="100%" alt=""/>
 
 </div>
