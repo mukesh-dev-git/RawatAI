@@ -18,7 +18,12 @@ export interface Facility {
   estimated_wait?: number;
 }
 
-const facilities = facilitiesData as Facility[];
+// A few source rows have impossible utilisation (negative or over 100%); treat those as unknown.
+const facilities = (facilitiesData as Facility[]).map((f) => ({
+  ...f,
+  util_nonicu: f.util_nonicu !== null && (f.util_nonicu < 0 || f.util_nonicu > 100) ? null : f.util_nonicu,
+  util_icu: f.util_icu !== null && (f.util_icu < 0 || f.util_icu > 100) ? null : f.util_icu,
+}));
 
 export function haversine(lat1: number, lon1: number, lat2: number, lon2: number): number {
   const R = 6371;
@@ -61,7 +66,7 @@ export function getNearbyFacilities(
     .map((f) => {
       const dist = haversine(lat, lon, f.lat, f.lon);
       const util = f.util_nonicu ?? 50;
-      const normDist = Math.min(dist / Math.max(radius, 1), 1);
+      const normDist = Math.min(dist / Math.min(Math.max(radius, 1), 100), 1); // P1 has no radius cap, so cap normalisation at 100 km
       const normUtil = util / 100;
       const score = normDist * 0.4 + normUtil * 0.6;
       return { ...f, distance_km: Math.round(dist * 10) / 10, score, estimated_wait: estimateWait(f.util_nonicu, priority) };

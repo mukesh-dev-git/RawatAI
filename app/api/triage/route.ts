@@ -57,12 +57,14 @@ export async function POST(req: NextRequest) {
     }
 
     const response = await groq.chat.completions.create({
-      model: "llama-3.1-8b-instant",
+      model: "openai/gpt-oss-20b",
+      reasoning_effort: "low",
       messages: [
         { role: "system", content: buildSystem(lang as "en" | "bm") },
         { role: "user",   content: contextParts.join("\n") },
       ],
       temperature: 0,
+      max_completion_tokens: 4096,
       response_format: { type: "json_object" },
     });
 

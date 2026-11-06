@@ -36,12 +36,14 @@ Respond ONLY with valid JSON, no explanation:
 }`;
 
     const response = await groq.chat.completions.create({
-      model: "llama-3.1-8b-instant",
+      model: "openai/gpt-oss-20b",
+      reasoning_effort: "low",
       messages: [
         { role: "system", content: system },
         { role: "user", content: `Patient symptoms: ${Array.isArray(symptoms) ? symptoms.join(", ") : symptoms}` },
       ],
       temperature: 0,
+      max_completion_tokens: 4096,
       response_format: { type: "json_object" },
     });
 
